@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RojgarMitraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginProvider" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailConfirmed" Type="Boolean" />
+    <Property Name="PasswordHash" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" />
+    <Property Name="TwoFactorEnables" Type="Boolean" />
+    <Property Name="LockoutEndDateUtc" Type="Boolean" />
+    <Property Name="AccessFailedCount" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CityMaster">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int64" Nullable="false" />
+    <Property Name="CityName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StateID" Type="Int64" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CityMaster1" Relationship="Self.FK_CityMaster_CityMaster" FromRole="CityMaster" ToRole="CityMaster1" />
+    <NavigationProperty Name="CityMaster2" Relationship="Self.FK_CityMaster_CityMaster" FromRole="CityMaster1" ToRole="CityMaster" />
+  </EntityType>
+  <EntityType Name="CompanyMaster">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CountriesMaster">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="StatesMasters" Relationship="Self.FK_StatesMaster_CountriesMaster" FromRole="CountriesMaster" ToRole="StatesMaster" />
+  </EntityType>
+  <EntityType Name="DesigationMaster">
+    <Key>
+      <PropertyRef Name="DesignationID" />
+    </Key>
+    <Property Name="DesignationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DesignationName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="OtherMaster">
+    <Key>
+      <PropertyRef Name="MasterID" />
+    </Key>
+    <Property Name="MasterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CODE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MasterType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatesMaster">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryID" Type="Int64" Nullable="false" />
+    <Property Name="Statename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CountriesMaster" Relationship="Self.FK_StatesMaster_CountriesMaster" FromRole="StatesMaster" ToRole="CountriesMaster" />
+  </EntityType>
+  <EntityType Name="Token">
+    <Key>
+      <PropertyRef Name="TokenID" />
+    </Key>
+    <Property Name="TokenID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="AuthToken" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IssuedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpiresOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="University_CollegeMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="University_CollegeName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserEducationDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProfessionalExperience" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="HighestQualification" Type="Int32" />
+    <Property Name="Course" Type="Int32" />
+    <Property Name="Specialization" Type="Int32" />
+    <Property Name="University_College" Type="Int64" />
+    <Property Name="CourseType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PassingYear" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_UserEducationDetails_UserMaster" FromRole="UserEducationDetails" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="UserEmployementDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="CurrentDesignation" Type="Int32" />
+    <Property Name="CurrentCompany" Type="Int32" />
+    <Property Name="AnualSalaryType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AnnualSalaryInlakhs" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="AnnualSalaryInThousand" Type="Int32" />
+    <Property Name="WorkingSinceYear" Type="Int32" />
+    <Property Name="WotkingSinceMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkingTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CurrentLocationID" Type="Int32" />
+    <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OutSideIndia" Type="Boolean" />
+    <Property Name="OutSideIndiaCountryID" Type="Int32" />
+    <Property Name="OutSideIndiaCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NoticePeriod" Type="Int32" />
+    <Property Name="ServeNoticePeriod" Type="Boolean" />
+    <Property Name="LastWorkingDay_Year" Type="Int32" />
+    <Property Name="Last_Working_Month" Type="Int32" />
+    <Property Name="Last_WorkingDate" Type="Int32" />
+    <Property Name="NewOfferedSalaryIn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NewOfferedSalaryInLakh" Type="Int32" />
+    <Property Name="NewOfferedSalaryInThousand" Type="Int32" />
+    <Property Name="OfferedDesignation" Type="Int32" />
+    <Property Name="NewCompany" Type="Int32" />
+    <Property Name="PassingYear" Type="Int32" />
+    <Property Name="FunctionalAreaID" Type="Int32" />
+    <Property Name="IndustryID" Type="Int32" />
+    <Property Name="JobType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_UserEmployementDetails_UserMaster" FromRole="UserEmployementDetails" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="EmailID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StdCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TotalExYear" Type="Int32" />
+    <Property Name="ToalExMonth" Type="Int32" />
+    <Property Name="ResumeTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Resume" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ProfileImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Extension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CurrentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LandLineNumber1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LandLineNumer2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Prefereedocation" Type="Int32" />
+    <Property Name="PermanentAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="HomeTown" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PinCode" Type="Int32" />
+    <Property Name="DobYear" Type="Int32" />
+    <Property Name="DobMonth" Type="Int32" />
+    <Property Name="DobDay" Type="Int32" />
+    <Property Name="MailingAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DiffAbled" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="MartialStatus" Type="Int32" />
+    <Property Name="KeySkills" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="UserEducationDetails" Relationship="Self.FK_UserEducationDetails_UserMaster" FromRole="UserMaster" ToRole="UserEducationDetails" />
+    <NavigationProperty Name="UserEmployementDetails" Relationship="Self.FK_UserEmployementDetails_UserMaster" FromRole="UserMaster" ToRole="UserEmployementDetails" />
+    <NavigationProperty Name="UserSkillsDetails" Relationship="Self.FK_UserSkillsDetails_UserMaster" FromRole="UserMaster" ToRole="UserSkillsDetails" />
+    <NavigationProperty Name="UserWokingHistories" Relationship="Self.FK_UserWokingHistory_UserMaster" FromRole="UserMaster" ToRole="UserWokingHistory" />
+  </EntityType>
+  <EntityType Name="UserPreEmployeementDetail">
+    <Key>
+      <PropertyRef Name="PreEmpID" />
+    </Key>
+    <Property Name="PreEmpID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="Desigation" Type="Int32" />
+    <Property Name="Company" Type="Int32" />
+    <Property Name="Duration_FromYear" Type="Int32" />
+    <Property Name="Duration_FromMonth" Type="Int32" />
+    <Property Name="Duration_ToYear" Type="Int32" />
+    <Property Name="Duration_ToMonth" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserSkillsDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="Skills" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Version" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="LastUsedYear" Type="Int32" />
+    <Property Name="Experience" Type="Int32" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_UserSkillsDetails_UserMaster" FromRole="UserSkillsDetails" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="UserWokingHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="DesignationId" Type="Int64" />
+    <Property Name="CompanyID" Type="Int64" />
+    <Property Name="WokingSinceYear" Type="Int32" />
+    <Property Name="workingSinceMonth" Type="Int32" />
+    <Property Name="WorkingSinceTo" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_UserWokingHistory_UserMaster" FromRole="UserWokingHistory" ToRole="UserMaster" />
+  </EntityType>
+  <Association Name="FK_CityMaster_CityMaster">
+    <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="1" />
+    <End Role="CityMaster1" Type="Self.CityMaster" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="CityMaster">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="CityMaster1">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StatesMaster_CountriesMaster">
+    <End Role="CountriesMaster" Type="Self.CountriesMaster" Multiplicity="1" />
+    <End Role="StatesMaster" Type="Self.StatesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CountriesMaster">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="StatesMaster">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEducationDetails_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+    <End Role="UserEducationDetails" Type="Self.UserEducationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserEducationDetails">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEmployementDetails_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+    <End Role="UserEmployementDetails" Type="Self.UserEmployementDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserEmployementDetails">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSkillsDetails_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+    <End Role="UserSkillsDetails" Type="Self.UserSkillsDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserSkillsDetails">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserWokingHistory_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+    <End Role="UserWokingHistory" Type="Self.UserWokingHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserWokingHistory">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RojgarMitraEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="CityMasters" EntityType="Self.CityMaster" />
+    <EntitySet Name="CompanyMasters" EntityType="Self.CompanyMaster" />
+    <EntitySet Name="CountriesMasters" EntityType="Self.CountriesMaster" />
+    <EntitySet Name="DesigationMasters" EntityType="Self.DesigationMaster" />
+    <EntitySet Name="OtherMasters" EntityType="Self.OtherMaster" />
+    <EntitySet Name="StatesMasters" EntityType="Self.StatesMaster" />
+    <EntitySet Name="Tokens" EntityType="Self.Token" />
+    <EntitySet Name="University_CollegeMaster" EntityType="Self.University_CollegeMaster" />
+    <EntitySet Name="UserEducationDetails" EntityType="Self.UserEducationDetail" />
+    <EntitySet Name="UserEmployementDetails" EntityType="Self.UserEmployementDetail" />
+    <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+    <EntitySet Name="UserPreEmployeementDetails" EntityType="Self.UserPreEmployeementDetail" />
+    <EntitySet Name="UserSkillsDetails" EntityType="Self.UserSkillsDetail" />
+    <EntitySet Name="UserWokingHistories" EntityType="Self.UserWokingHistory" />
+    <AssociationSet Name="FK_CityMaster_CityMaster" Association="Self.FK_CityMaster_CityMaster">
+      <End Role="CityMaster" EntitySet="CityMasters" />
+      <End Role="CityMaster1" EntitySet="CityMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StatesMaster_CountriesMaster" Association="Self.FK_StatesMaster_CountriesMaster">
+      <End Role="CountriesMaster" EntitySet="CountriesMasters" />
+      <End Role="StatesMaster" EntitySet="StatesMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEducationDetails_UserMaster" Association="Self.FK_UserEducationDetails_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="UserEducationDetails" EntitySet="UserEducationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEmployementDetails_UserMaster" Association="Self.FK_UserEmployementDetails_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="UserEmployementDetails" EntitySet="UserEmployementDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSkillsDetails_UserMaster" Association="Self.FK_UserSkillsDetails_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="UserSkillsDetails" EntitySet="UserSkillsDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserWokingHistory_UserMaster" Association="Self.FK_UserWokingHistory_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="UserWokingHistory" EntitySet="UserWokingHistories" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
